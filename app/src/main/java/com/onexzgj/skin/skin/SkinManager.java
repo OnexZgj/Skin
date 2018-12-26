@@ -6,6 +6,8 @@ import android.content.res.AssetManager;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 
+import com.onexzgj.skin.utils.FileUtils;
+
 import java.lang.reflect.Method;
 
 public class SkinManager {
@@ -34,7 +36,7 @@ public class SkinManager {
     }
 
 
-    public void loadSkin(String apkName){
+    public boolean loadSkin(String apkName){
 
         String apkPath = FileUtils.copyAssetsToCache(mContext, apkName);
         try {
@@ -51,7 +53,10 @@ public class SkinManager {
         } catch (Exception e) {
 
             e.printStackTrace();
+            return false;
         }
+
+        return true;
     }
 
 

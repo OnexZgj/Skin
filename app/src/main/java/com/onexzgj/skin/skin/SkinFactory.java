@@ -5,6 +5,8 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 
+import com.onexzgj.skin.utils.FileUtils;
+
 import java.util.ArrayList;
 
 /**
@@ -13,9 +15,7 @@ import java.util.ArrayList;
  */
 public class SkinFactory implements LayoutInflater.Factory {
 
-
     private ArrayList<SkinViewItem>  viewItems=new ArrayList<>();
-//    private SkinViewItem skinViewItem =new SkinViewItem();
 
     private static final String[] sClassPrefixList = {
             "android.widget.",
@@ -31,7 +31,6 @@ public class SkinFactory implements LayoutInflater.Factory {
         if (view!=null){
             passSkinViewAttr(view,context,attributeSet);
         }
-
         return view;
     }
 

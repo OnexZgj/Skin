@@ -1,4 +1,4 @@
-package com.onexzgj.skin.skin;
+package com.onexzgj.skin.utils;
 
 import android.content.Context;
 import android.util.AttributeSet;

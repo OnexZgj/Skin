@@ -1,6 +1,8 @@
-package com.onexzgj.skin.skin;
+package com.onexzgj.skin.base;
 
 import android.app.Application;
+
+import com.onexzgj.skin.skin.SkinManager;
 
 public class MyApp extends Application {
     @Override
