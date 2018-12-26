@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/tb_am_title"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimaryDark"
+        android:gravity="center_vertical"
+        android:paddingLeft="5dp"
+        android:text="换肤框架"
+        android:textSize="18sp"
+        android:textColor="#fff"
+        />
+
+    <Button
+        android:id="@+id/btn_am_change_skin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark"
+        android:text="换肤"
+        android:layout_marginTop="10dp"
+        android:textColor="#fff" />
+
+    <Button
+        android:id="@+id/btn_am_change_default"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark"
+        android:layout_marginTop="10dp"
+        android:text="默认"
+        android:textColor="#fff" />
+
+</LinearLayout>
