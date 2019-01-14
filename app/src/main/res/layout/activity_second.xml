@@ -9,6 +9,10 @@
     tools:context="com.onexzgj.skin.activity.SecondActivity">
 
 
+    <android.support.v7.widget.Toolbar
+       style="@style/action_bar"
+        app:title="Skin"/>
+
     <TextView
         android:id="@+id/tb_am_title"
         android:layout_width="match_parent"

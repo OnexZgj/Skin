@@ -39,21 +39,31 @@ public class SkinManager {
     public boolean loadSkin(String apkName){
 
         String apkPath = FileUtils.copyAssetsToCache(mContext, apkName);
-        try {
-            AssetManager manager = AssetManager.class.newInstance();
-            Method method = AssetManager.class.getDeclaredMethod("addAssetPath", String.class);
-            method.invoke(manager,apkPath);
-            Resources res = mContext.getResources();
 
-            mSkinResources = new Resources(manager, res.getDisplayMetrics(), res.getConfiguration());
+        if (apkName!="") {
 
-            mPackageName = mContext.getPackageManager().getPackageArchiveInfo(apkPath,
-                    PackageManager.GET_ACTIVITIES | PackageManager.GET_SERVICES).packageName;
+            try {
+                AssetManager manager = AssetManager.class.newInstance();
+                Method method = AssetManager.class.getDeclaredMethod("addAssetPath", String.class);
+                method.invoke(manager, apkPath);
 
-        } catch (Exception e) {
+                //当前应用的resources对象，获取到屏幕相关的参数和配置
+                Resources res = mContext.getResources();
 
-            e.printStackTrace();
-            return false;
+                //getResources()方法通过  AssetManager的addAssetPath方法，构造出Resource对象，由于是Library层的代码，所以需要用到反射
+
+                mSkinResources = new Resources(manager, res.getDisplayMetrics(), res.getConfiguration());
+
+                mPackageName = mContext.getPackageManager().getPackageArchiveInfo(apkPath,
+                        PackageManager.GET_ACTIVITIES | PackageManager.GET_SERVICES).packageName;
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                return false;
+            }
+        }else{
+            mSkinResources=mContext.getResources();
+            mPackageName=mContext.getPackageName();
         }
 
         return true;
@@ -85,6 +95,21 @@ public class SkinManager {
             }
         }
         return color ;
+    }
+
+
+    public int getColorPrimaryDark() {
+        try {
+            if (mSkinResources != null) {
+
+                int identify = mSkinResources.getIdentifier("colorPrimaryDark", "color", mPackageName);
+                return mSkinResources.getColor(identify);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            return -1;
+        }
+        return -1;
     }
 
 

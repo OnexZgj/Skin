@@ -22,7 +22,7 @@ public class SkinViewAttr {
     private String typeName;
 
     /**
-     * 对应drawable下面的文件的名称
+     * 对应drawable下面的文件的名称  //btn_bg
      */
     private String entryName;
 

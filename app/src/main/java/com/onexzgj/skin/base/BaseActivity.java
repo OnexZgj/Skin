@@ -1,12 +1,12 @@
 package com.onexzgj.skin.base;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.widget.Toast;
 
-import com.onexzgj.skin.activity.MainActivity;
 import com.onexzgj.skin.skin.SkinFactory;
 import com.onexzgj.skin.skin.SkinManager;
 import com.onexzgj.skin.utils.RxSchedulers;
@@ -24,12 +24,13 @@ public class BaseActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        skinFactory = new SkinFactory();
+        skinFactory = new SkinFactory(this);
         LayoutInflater.from(this).setFactory(skinFactory);
         super.onCreate(savedInstanceState);
     }
 
 
+    @SuppressLint("CheckResult")
     public void changeSkin(){
         Observable.create(new ObservableOnSubscribe<Boolean>() {
             @Override
