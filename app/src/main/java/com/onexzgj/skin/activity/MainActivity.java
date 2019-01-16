@@ -3,11 +3,12 @@ package com.onexzgj.skin.activity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.SPUtils;
+import com.blankj.utilcode.util.SpanUtils;
 import com.onexzgj.skin.base.BaseActivity;
 import com.onexzgj.skin.skin.R;
 import com.onexzgj.skin.skin.SkinManager;
@@ -18,59 +19,50 @@ import butterknife.OnClick;
 
 public class MainActivity extends BaseActivity {
 
-    @BindView(R.id.tb_am_title)
-    TextView tbAmTitle;
-    @BindView(R.id.btn_am_change_skin)
-    Button btnAmChangeSkin;
-    @BindView(R.id.btn_am_change_default)
-    Button btnAmChangeDefault;
-    @BindView(R.id.btn_am_change_activity)
-    Button btnAmChangeActivity;
     @BindView(R.id.tv_am_change_skin_blue)
     TextView tvAmChangeSkinBlue;
-    @BindView(R.id.tv_am_change_skin_red)
-    TextView tvAmChangeSkinRed;
+    @BindView(R.id.tv_am_change_skin_green)
+    TextView tvAmChangeSkinGreen;
     @BindView(R.id.tv_am_change_default)
     TextView tvAmChangeDefault;
+    @BindView(R.id.ll_am_music)
+    LinearLayout llAmMusic;
+
+
     private String TAG="MainActivity";
 
 
-    @SuppressLint("PrivateApi")
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
-
-        int identifier = getResources().getIdentifier("status_bar_height", "dimen", "android");
-        int dimensionPixelSize = getResources().getDimensionPixelSize(identifier);
-        Log.d(TAG, "onCreate: " +dimensionPixelSize);
+    protected void initData() {
 
     }
 
-    @OnClick({R.id.btn_am_change_skin, R.id.btn_am_change_default, R.id.btn_am_change_activity, R.id.tv_am_change_skin_blue, R.id.tv_am_change_skin_red, R.id.tv_am_change_default})
+    @Override
+    public int getContetId() {
+        return R.layout.activity_main;
+    }
+
+    @OnClick({R.id.ll_am_music, R.id.tv_am_change_skin_blue, R.id.tv_am_change_skin_green, R.id.tv_am_change_default})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.btn_am_change_skin:
-
-                changeSkin();
-                break;
-            case R.id.btn_am_change_default:
-                //恢复默认
-//                SkinManager.getInstance().loadSkin("skinred.apk");
-//                skinFactory.apply();
-
-                SkinManager.getInstance().loadSkin("");
-                skinFactory.apply();
-                break;
-            case R.id.btn_am_change_activity:
-                startActivity(new Intent(this, SecondActivity.class));
+            case R.id.ll_am_music:
+                //TODO 验证RecycleView/ListView的换肤是否支持
+                startActivity(new Intent(MainActivity.this,MusicActivity.class));
                 break;
             case R.id.tv_am_change_skin_blue:
+                SkinManager.getInstance().loadSkin("skinblueapk.apk");
+                skinFactory.apply();
+                SPUtils.getInstance().put(Constant.CURRENT_SKIN,"skinblueapk.apk");
                 break;
-            case R.id.tv_am_change_skin_red:
+            case R.id.tv_am_change_skin_green:
+                SkinManager.getInstance().loadSkin("skingreen.apk");
+                skinFactory.apply();
+                SPUtils.getInstance().put(Constant.CURRENT_SKIN,"skingreen.apk");
                 break;
             case R.id.tv_am_change_default:
+                SkinManager.getInstance().loadSkin("");
+                skinFactory.apply();
+                SPUtils.getInstance().put(Constant.CURRENT_SKIN,"");
                 break;
         }
     }

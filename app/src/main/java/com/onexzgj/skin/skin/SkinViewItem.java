@@ -1,7 +1,9 @@
 package com.onexzgj.skin.skin;
 
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toolbar;
 
 import java.util.ArrayList;
 
@@ -41,7 +43,7 @@ public class SkinViewItem {
     public void apply() {
 
         for (SkinViewAttr skinViewAttr: attrs) {
-            if ("background".equals(skinViewAttr.getAttrName())){
+            if ("background".equals(skinViewAttr.getAttrName()) ){
                 //如果是backgroud 改变属性
                 if ("drawable".equals(skinViewAttr.getTypeName())){
 
@@ -55,6 +57,25 @@ public class SkinViewItem {
                 //textview只改变字体
 
                 ((TextView) view).setTextColor(SkinManager.getInstance().getColor(skinViewAttr.getId()));
+            }else if( "src".equals(skinViewAttr.getAttrName())){
+                //如果是backgroud 改变属性
+                if ("drawable".equals(skinViewAttr.getTypeName())){
+                    if (view instanceof ImageView) {
+
+//                        ((ImageView)view).setBackgroundDrawable(SkinManager.getInstance().getDrawable(skinViewAttr.getId()));
+                        ((ImageView)view).setImageDrawable(SkinManager.getInstance().getDrawable(skinViewAttr.getId()));
+                    }
+                }else if ("color".equals(skinViewAttr.getTypeName())){
+                    view.setBackgroundColor(SkinManager.getInstance().getColor(skinViewAttr.getId()));
+                }
+            }else if ("titleTextColor".equals(skinViewAttr.getTypeName())){
+                if (view instanceof Toolbar){
+                    ((Toolbar)view).setTitleTextColor(SkinManager.getInstance().getColor(skinViewAttr.getId()));
+                }
+            }else if("textColor".equals(skinViewAttr.getTypeName())){
+                if (view instanceof TextView) {
+                    ((TextView)view).setTextColor(SkinManager.getInstance().getColor(skinViewAttr.getId()));
+                }
             }
         }
     }

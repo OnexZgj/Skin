@@ -7,36 +7,51 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.widget.Toast;
 
+import com.blankj.utilcode.util.SPUtils;
+import com.onexzgj.skin.activity.Constant;
 import com.onexzgj.skin.skin.SkinFactory;
 import com.onexzgj.skin.skin.SkinManager;
 import com.onexzgj.skin.utils.RxSchedulers;
 
+import butterknife.ButterKnife;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.functions.Consumer;
 
-public class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends AppCompatActivity {
 
     protected SkinFactory skinFactory;
-    private String mApkName="";
+    private String mApkName = "";
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         skinFactory = new SkinFactory(this);
         LayoutInflater.from(this).setFactory(skinFactory);
+
+        String apkPath = SPUtils.getInstance().getString(Constant.CURRENT_SKIN);
+        changeSkin(apkPath);
         super.onCreate(savedInstanceState);
+        setContentView(getContetId());
+        ButterKnife.bind(this);
+
+        initData();
+
     }
+
+    protected abstract void initData();
+
+    public abstract int getContetId();
 
 
     @SuppressLint("CheckResult")
-    public void changeSkin(){
+    public void changeSkin(final String name) {
         Observable.create(new ObservableOnSubscribe<Boolean>() {
             @Override
             public void subscribe(ObservableEmitter<Boolean> emitter) throws Exception {
                 //开始换肤
-                boolean b = SkinManager.getInstance().loadSkin("skinapk.apk");
+                boolean b = SkinManager.getInstance().loadSkin(name);
                 emitter.onNext(b);
             }
         }).compose(RxSchedulers.<Boolean>applySchedulers())
