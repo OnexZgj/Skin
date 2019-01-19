@@ -390,7 +390,9 @@ Github地址: [https://github.com/OnexZgj/Skin](https://github.com/OnexZgj/Skin
 
 这里只是插件换肤的一个思想以及简单实现，需要优化的地方有很多，待后期更行
 
-如果你觉得不错，请给我一个 star ，这是我最大的动力和支持，非常感谢！٩(๑>◡<๑)۶
+## 7、关于我:
+- [CSDN](https://blog.csdn.net/qq_15988951)
+- [简书](https://www.jianshu.com/u/a72b21d4d650)
 
 
 
